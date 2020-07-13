@@ -16,7 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from InstaDUP.views import HelloWord
+from InstaDUP.views import (HelloWorld, PostView, PostDetailView, 
+                            PostCreateView, PostUpdateView, PostDeleteView,
+                            addLike, UserDetailView)
+
 urlpatterns = [
-    path('', HelloWord.as_view(), name='HelloWord')
-]
+    path('', HelloWorld.as_view(), name='HelloWorld'),
+    path('posts/', PostView.as_view(), name="posts"),
+    path('posts/<int:pk>/', PostDetailView.as_view(), name="post_detail"),
+    path('post/new/', PostCreateView.as_view(), name = "make_post"),
+    path('post/update/<int:pk>/', PostUpdateView.as_view(), name="post_update"),
+    path('post/delete/<int:pk>', PostDeleteView.as_view(), name="post_delete"),
+    path('like', addLike, name='addLike'),
+    path('user/<int:pk>/', UserDetailView.as_view(), name="user_detail"),
+    ]
