@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whilenoise.runserver_nostatic'
+    'whitenoise.runserver_nostatic'
     'django.contrib.staticfiles',
     'InstaDUP',
     'imagekit',
