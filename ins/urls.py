@@ -23,5 +23,5 @@ urlpatterns = [
     path('InstaDUP/', include('InstaDUP.urls')),
     path('auth/', include('django.contrib.auth.urls')),
     path('auth/signup/', SignUp.as_view(), name="signup"),
-    path('', include('InstaDUP.urls'))
+    #path('', SignUp.as_view(), name="signup")
 ]

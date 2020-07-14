@@ -18,7 +18,7 @@ from django.urls import path
 
 from InstaDUP.views import (HelloWorld, PostView, PostDetailView, 
                             PostCreateView, PostUpdateView, PostDeleteView,
-                            addLike, UserDetailView)
+                            addLike, UserDetailView, addComment)
 
 urlpatterns = [
     path('', HelloWorld.as_view(), name='HelloWorld'),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('post/update/<int:pk>/', PostUpdateView.as_view(), name="post_update"),
     path('post/delete/<int:pk>', PostDeleteView.as_view(), name="post_delete"),
     path('like', addLike, name='addLike'),
+    path('comment', addComment, name='addComment'),
     path('user/<int:pk>/', UserDetailView.as_view(), name="user_detail"),
     ]

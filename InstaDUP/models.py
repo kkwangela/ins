@@ -55,8 +55,16 @@ class Post(models.Model):
         null=True
     )
 
+    posted_on = models.DateTimeField(
+        auto_now_add=True, 
+        editable = False
+        )
+
     def get_like_count(self):
         return self.likes.count()
+
+    def get_comment_count(self):
+        return self.comments.count()
     
     def get_absolute_url(self):
         return  reverse("post_detail", args=[str(self.id)])
@@ -79,3 +87,18 @@ class Like(models.Model):
     def __str__(self):
         return 'Like: ' + self.user.username + ' likes ' + self.post.title
     
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete = models.CASCADE,
+        related_name='comments'
+    )
+    user = models.ForeignKey(
+        InstaUser,
+        on_delete=models.CASCADE
+    )
+    comment = models.CharField(max_length=100)
+    posted_on = models.DateTimeField(auto_now_add=True, editable = False)
+
+    def __str__(self):
+        return self.comment
