@@ -18,7 +18,7 @@ from django.urls import path
 
 from InstaDUP.views import (HelloWorld, PostView, PostDetailView, 
                             PostCreateView, PostUpdateView, PostDeleteView,
-                            addLike, UserDetailView, addComment)
+                            addLike, UserDetailView, addComment, toggleFollow)
 
 urlpatterns = [
     path('', HelloWorld.as_view(), name='HelloWorld'),
@@ -30,4 +30,5 @@ urlpatterns = [
     path('like', addLike, name='addLike'),
     path('comment', addComment, name='addComment'),
     path('user/<int:pk>/', UserDetailView.as_view(), name="user_detail"),
+    path('togglefollow', toggleFollow, name="togglefollow"),
     ]
