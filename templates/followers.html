@@ -1,0 +1,24 @@
+  
+{% extends 'base.html' %}
+
+{% block content %}
+
+followers
+<div class="profile__body">
+    <div class="row">
+        {% for follower in object.get_followers %}
+        <div class="col-xs-4">
+            <div class="picture-square" style="background-image: url(http://{{ request.META.HTTP_HOST }}/{{ post.image.url }}); background-size: contain;">
+                <a href="{% url 'user_detail' follower.pk %}">
+                {% if object.profile_pic %}
+                    <img class="picture-circle" src="/{{follower.profile_pic}}">
+                {% endif %}
+                <h1 class="username">{{ follower.username }}</h1>
+                </a>>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

@@ -23,6 +23,16 @@ class PostView(ListView):
             following.add(conn.following)
         return Post.objects.filter(author__in=following)
 
+class Followers(ListView):
+    model = InstaUser
+    template_name = 'followers.html'
+    def get_queryset(self):
+        current_user = self.request.user
+        following = set()
+        for conn in UserConnection.objects.filter(following=current_user).select_related('creator'):
+            following.add(conn.creator)
+        return InstaUser.objects.filter(author__in=following)
+
 class PostDetailView(DetailView):
     model = Post 
     template_name = "post_detail.html"
@@ -51,6 +61,22 @@ class SignUp(CreateView):
     form_class = CustomUserCreationForm
     template_name = "sign_up.html"
     success_url = reverse_lazy("login")
+
+
+class EditProfile(LoginRequiredMixin, UpdateView):
+    model = InstaUser
+    template_name = 'edit_profile.html'
+    fields = ['profile_pic', 'username']
+    login_url = 'login'
+
+class ExploreView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'explore.html'
+    login_url = 'login'
+
+    def get_queryset(self):
+        return Post.objects.all().order_by('-posted_on')[:20]
+
 
 @ajax_request #addLike函数只用来响应ajax_request
 def addLike(request):

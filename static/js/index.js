@@ -125,7 +125,7 @@ function follow_user(success_cb, error_cb, type) {
   
     $.ajax({
       type: "POST",
-      url: '/togglefollow',
+      url: '/InstaDUP/togglefollow',
       data: {
         follow_user_pk: follow_user_pk,
         type: type
@@ -134,6 +134,7 @@ function follow_user(success_cb, error_cb, type) {
       error: function(error) { error_cb(error); }
     });
 }
+
   
 function update_follow_view(data) {
     console.log('calling update_follow_view');
